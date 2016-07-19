@@ -40,8 +40,14 @@ public class MyHashMap<K, V> extends MyBetterMap<K, V> implements Map<K, V> {
 	 * 
 	 */
 	protected void rehash() {
-        // TODO: fill this in.
-        throw new UnsupportedOperationException();
+		List<MyLinearMap<K, V>> savedMaps = maps;
+		
+		super.makeMaps(size() * 2);
+		for(MyLinearMap<K, V> m : savedMaps){
+			for(K key: m.keySet()){
+				put(key, m.get(key));
+			}
+		}	
 	}
 
 	/**
